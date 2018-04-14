@@ -194,7 +194,7 @@ function resolve(isbn) {
   })
   .then(function (book) {
     if (typeof(callback) === 'function') {
-      callback(null, book);
+      return callback(null, book);
     } else {
       return Promise.resolve(book);
     }
@@ -202,7 +202,7 @@ function resolve(isbn) {
   .catch(function (err) {
     if (typeof(callback) === 'function') {
       // Error will be handled by callback
-      callback(err, null);
+      return callback(err, null);
     } else {
       // Re-raise the error for the next .then/.catch in the chain
       return Promise.reject(err);
